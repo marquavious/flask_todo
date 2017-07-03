@@ -12,12 +12,12 @@ class TodoModel(db.Model):
         self.title = title
         self.description = description
 
-    def json():
-        return {'name':self.name, 'description':self.description}
+    def json(self):
+        return {'name':self.title, 'description':self.description}
 
     @classmethod
     def find_by_title(cls,title):
-        return cls.query.filter_by(title=title)
+        return cls.query.filter_by(title=title).first()
 
     def save_to_db(self):
         db.session.add(self)

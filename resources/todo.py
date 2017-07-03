@@ -5,11 +5,6 @@ from flask_restful import Resource,reqparse
 class Todo(Resource):
 
     parser = reqparse.RequestParser()
-    parser.add_argument('title',
-        type = str,
-        required = True,
-        help = "All todos must have a title"
-    )
 
     parser.add_argument('description',
         type = str,
@@ -24,8 +19,8 @@ class Todo(Resource):
         return {'message':'Note was never created'}
 
     def post(self,title):
-        # if TodoModel.find_by_title(title):
-        #      return {"message':'a todo with the title of '{}' already exists.".format(title)}
+        if TodoModel.find_by_title(title):
+             return {"message":"a todo with the title of '{}' already exists.".format(title)}
 
         data = Todo.parser.parse_args()
 
