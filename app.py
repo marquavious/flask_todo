@@ -7,7 +7,6 @@ api = Api(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 
-
 from resources.todo import Todo, TodoList
 
 @app.before_first_request

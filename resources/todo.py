@@ -34,23 +34,17 @@ class Todo(Resource):
         return todo.json(), 201
 
     def put(self,title):
-         # Grab data from parser
         data = Todo.parser.parse_args()
 
-        # Look for an item
         todo = TodoModel.find_by_title(title)
 
-        # If the item doesnt exists, create one
         if todo is None:
             todo = TodoModel(title,data['description'])
-        # Else just update price
         else:
             todo.description = data['description']
 
-        # Save it or update it to the DB
         todo.save_to_db()
 
-        # Return json of the item to show it was created
         return todo.json()
 
     def delete(self,title):
