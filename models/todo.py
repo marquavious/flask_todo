@@ -2,21 +2,21 @@ from db import db
 
 class TodoModel(db.Model):
 
-    __tablename__ = "todos"
+    __tablename__ = 'todos'
 
     id = db.Column(db.Integer,primary_key = True)
     title = db.Column(db.String)
     description = db.Column(db.String)
-    category_id = db.Column(db.Integer, db.ForeignKey.('category.id'))
+    category_id = db.Column(db.String,db.ForeignKey('categories.name'))
     category = db.relationship('CategoryModel')
 
-    def __init__(self,title,description,category_id):
+    def __init__(self,title,description, category_id):
         self.title = title
         self.description = description
         self.category_id = category_id
 
     def json(self):
-        return {'name':self.title, 'description':self.description}
+        return { 'name':self.title, 'description':self.description, 'category_name':self.category_id }
 
     @classmethod
     def find_by_title(cls,title):

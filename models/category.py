@@ -2,12 +2,11 @@ from db import db
 
 class CategoryModel(db.Model):
 
-    __tablename__= "category"
+    __tablename__= "categories"
 
-    name = db.Column(db.String)
     id = db.Column(db.Integer, primary_key=True)
-    todos = db.Relationship('TodoModel', lazy = 'dynamic')
-
+    name = db.Column(db.String)
+    todos = db.relationship('TodoModel', lazy = 'dynamic')
 
     def __init__(self,name):
         self.name = name
@@ -17,7 +16,7 @@ class CategoryModel(db.Model):
 
     @classmethod
     def find_by_name(cls,name):
-        return cls.query.find_by(name=name).first()
+        return cls.query.filter_by(name=name).first()
 
     def save_to_db(self):
         db.session.add(self)
