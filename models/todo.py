@@ -15,6 +15,9 @@ class TodoModel(db.Model):
         self.description = description
         self.category_id = category_id
 
+    def __str__(self):
+        return self.title
+
     def json(self):
         return { 'name':self.title, 'description':self.description, 'category_name':self.category_id }
 

@@ -11,6 +11,9 @@ class CategoryModel(db.Model):
     def __init__(self,name):
         self.name = name
 
+    def __str__(self):
+        return self.name
+
     def json(self):
         return {'name':self.name,'items':[todo.json() for todo in self.todos]}
 
